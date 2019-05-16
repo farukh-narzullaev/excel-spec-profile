@@ -28,8 +28,15 @@ class SpecificationExcel
         Header::create($sheet);
         ProjectImage::create($sheet);
         SpecTable::create($sheet);
+        TotalTable::create($sheet);
+        Note::create($sheet);
+        Steps::create($sheet);
+        Footer::create($sheet);
+
+        $sheet->getProtection()->setSheet(true);
 
         $writer = new Xlsx($this->spreadsheet);
+        $writer->setOffice2003Compatibility(true);
         $writer->save($this->output);
     }
 

@@ -14,16 +14,21 @@ class ProjectImage
         $projectImage = new Drawing();
         $projectImage->setPath('images/1.png');
         $projectImage->setResizeProportional(false);
-        $projectImage->setWidthAndHeight(559, 268);
-        $projectImage->setCoordinates('A12');
-
+        // $projectImage->setWidth(640);
+        // $projectImage->setHeight(270);
+        $projectImage->setWidthAndHeight(576, 258);
+        $projectImage->setCoordinates('A13');
+        $projectImage->setOffsetY(1);
         $projectImage->setWorksheet($sheet);
 
-        $sheet->getStyle('A12:G25')
-            ->getBorders()
-            ->getAllBorders()
-            ->setBorderStyle(Border::BORDER_THICK)
-            ->setColor(new Color('757575'));
-
+        $sheet->getStyle('A13:I25')
+            ->applyFromArray([
+                'borders' => [
+                    'outline' => [
+                        'borderStyle' => Border::BORDER_THIN,
+                        'color' => ['argb' => '757575']
+                    ]
+                ]
+            ]);
     }
 }

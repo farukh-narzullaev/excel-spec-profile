@@ -17,7 +17,9 @@ class Header
         $header->setDescription('Logo');
         $header->setPath('images/header.png');
         $header->setResizeProportional(false);
-        $header->setWidthAndHeight(1279, 190);
+        $header->setWidth(1280);
+        $header->setHeight(200);
+        //$header->setWidthAndHeight(1450, 200);
         $header->setHyperlink($headerLink);
         $header->setWorksheet($sheet);
     }
