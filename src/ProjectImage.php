@@ -16,7 +16,10 @@ class ProjectImage
         $projectImage->setResizeProportional(false);
         // $projectImage->setWidth(640);
         // $projectImage->setHeight(270);
-        $projectImage->setWidthAndHeight(576, 258);
+
+        // 576x258 Windows
+        // 636x258 Mac
+        $projectImage->setWidthAndHeight(636, 258);
         $projectImage->setCoordinates('A13');
         $projectImage->setOffsetY(1);
         $projectImage->setWorksheet($sheet);

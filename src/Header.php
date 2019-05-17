@@ -17,7 +17,10 @@ class Header
         $header->setDescription('Logo');
         $header->setPath('images/header.png');
         $header->setResizeProportional(false);
-        $header->setWidth(1280);
+
+        // 1280 Windows
+        // 1413 Mac
+        $header->setWidth(1413);
         $header->setHeight(200);
         //$header->setWidthAndHeight(1450, 200);
         $header->setHyperlink($headerLink);
