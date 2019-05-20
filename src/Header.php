@@ -20,8 +20,9 @@ class Header
 
         // 1280 Windows
         // 1413 Mac
-        $header->setWidth(1413);
-        $header->setHeight(200);
+        // 1598 Linux
+        $header->setWidth(1598);
+        $header->setHeight(210);
         //$header->setWidthAndHeight(1450, 200);
         $header->setHyperlink($headerLink);
         $header->setWorksheet($sheet);
