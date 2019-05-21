@@ -2,14 +2,8 @@
 
 namespace App;
 
-use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Style\Color;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use PhpOffice\PhpSpreadsheet\Style\Border;
-use PhpOffice\PhpSpreadsheet\Cell\Hyperlink;
-use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
-use PhpOffice\PhpSpreadsheet\RichText\RichText;
 
 class SpecificationExcel
 {
@@ -22,11 +16,12 @@ class SpecificationExcel
         $this->output = $output;
     }
 
-    public function generate()
+    public function generate($version)
     {
         $sheet = $this->createSheet();
-        Header::create($sheet);
-        ProjectImage::create($sheet);
+        Header::create($sheet, $version);
+        ProjectImage::create($sheet, $version);
+
         SpecTable::create($sheet);
         TotalTable::create($sheet);
         Note::create($sheet);

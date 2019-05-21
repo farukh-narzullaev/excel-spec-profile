@@ -8,16 +8,30 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class ProjectImage
 {
-    public static function create(Worksheet $sheet)
+    /**
+     * @var array
+     */
+    private static $sizes = [
+        'win' => [576, 258],
+        'mac' => [636, 258],
+        'nix' => [719, 245],
+    ];
+
+    /**
+     * @param Worksheet $sheet
+     * @param string    $version
+     *
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
+    public static function create(Worksheet $sheet, $version)
     {
         $projectImage = new Drawing();
         $projectImage->setPath('images/1.png');
         $projectImage->setResizeProportional(false);
 
-        // 576x258 Windows
-        // 636x258 Mac
-        // 719x245 Linux
-        $projectImage->setWidthAndHeight(719, 245);
+        list($width, $height) = static::$sizes[$version];
+
+        $projectImage->setWidthAndHeight($width, $height);
         $projectImage->setCoordinates('A13');
         $projectImage->setOffsetY(1);
         $projectImage->setWorksheet($sheet);

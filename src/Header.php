@@ -8,7 +8,22 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class Header
 {
-    public static function create(Worksheet $sheet)
+    /**
+     * @var array
+     */
+    private static $sizes = [
+        'win' => 1280,
+        'mac' => 1413,
+        'nix' => 1598,
+    ];
+
+    /**
+     * @param Worksheet $sheet
+     * @param string    $version
+     *
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
+    public static function create(Worksheet $sheet, $version)
     {
         $headerLink = new Hyperlink('http://sculptform.com.au', 'Go to the SculptForm');
 
@@ -18,12 +33,8 @@ class Header
         $header->setPath('images/header.png');
         $header->setResizeProportional(false);
 
-        // 1280 Windows
-        // 1413 Mac
-        // 1598 Linux
-        $header->setWidth(1598);
+        $header->setWidth(static::$sizes[$version]);
         $header->setHeight(210);
-        //$header->setWidthAndHeight(1450, 200);
         $header->setHyperlink($headerLink);
         $header->setWorksheet($sheet);
     }
