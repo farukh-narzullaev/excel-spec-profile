@@ -8,10 +8,17 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class Steps
 {
-    public static function create(Worksheet $sheet)
+    private static $pos;
+
+    public static function create(Worksheet $sheet, $pos)
     {
+        static::$pos = ($pos + 3);
         static::title($sheet);
+
+        static::$pos += 3;
         static::steps($sheet);
+
+        return static::$pos;
     }
 
     private static function steps(Worksheet $sheet)
@@ -23,14 +30,18 @@ class Steps
 
     private static function step1(Worksheet $sheet)
     {
-        $cell = "A49:F55";
+        $pos = static::$pos;
+        $merge = $pos + 6;
+
+        $cell = "A{$pos}:F{$merge}";
         $bold = "Calculate your cost.";
         $text = "If the product specification and pricing is satisfactory, simply multiply this m 2 price by the m 2 of material required for your project.";
 
         static::styleStep($sheet, $cell);
 
         $richText = new RichText();
-        $richText->createTextRun("Step 1 \n")->getFont()->setBold(true)->setSize(20)->getColor()->setARGB('8b0000');
+        $richText->createTextRun("Step 1")->getFont()->setBold(true)->setSize(20)->getColor()->setARGB('8b0000');
+        $richText->createText("\r\n");
         $richText->createTextRun("{$bold} ")->getFont()->setBold(true)->setSize(15)->getColor()->setARGB('696969');
         $richText->createTextRun($text)->getFont()->setSize(14)->getColor()->setARGB('696969');
 
@@ -39,7 +50,10 @@ class Steps
 
     private static function step2(Worksheet $sheet)
     {
-        $cell = "H49:M55";
+        $pos = static::$pos;
+        $merge = $pos + 6;
+
+        $cell = "H{$pos}:M{$merge}";
         $bold = " BOQ estimation ";
         $text = "Once the tender has been approved, email us the final construction drawings to receive a formal";
         $text2 = "which includes all standard trims and componentry.";
@@ -47,7 +61,8 @@ class Steps
         static::styleStep($sheet, $cell);
 
         $richText = new RichText();
-        $richText->createTextRun("Step 2 \n")->getFont()->setBold(true)->setSize(20)->getColor()->setARGB('8b0000');
+        $richText->createTextRun("Step 2 ")->getFont()->setBold(true)->setSize(20)->getColor()->setARGB('8b0000');
+        $richText->createText("\r\n");
         $richText->createTextRun($text)->getFont()->setSize(14)->getColor()->setARGB('696969');
         $richText->createTextRun("{$bold}")->getFont()->setBold(true)->setSize(15)->getColor()->setARGB('696969');
         $richText->createTextRun($text2)->getFont()->setSize(14)->getColor()->setARGB('696969');
@@ -58,14 +73,18 @@ class Steps
 
     private static function step3(Worksheet $sheet)
     {
-        $cell = "O49:T55";
+        $pos = static::$pos;
+        $merge = $pos + 6;
+
+        $cell = "O{$pos}:T{$merge}";
         $bold = "place your order.";
         $text = "Review itemised quote and follow the prompts to ";
 
         static::styleStep($sheet, $cell);
 
         $richText = new RichText();
-        $richText->createTextRun("Step 3 \n")->getFont()->setBold(true)->setSize(20)->getColor()->setARGB('8b0000');
+        $richText->createTextRun("Step 3 ")->getFont()->setBold(true)->setSize(20)->getColor()->setARGB('8b0000');
+        $richText->createText("\r\n");
         $richText->createTextRun($text)->getFont()->setSize(14)->getColor()->setARGB('696969');
         $richText->createTextRun("{$bold} ")->getFont()->setBold(true)->setSize(15)->getColor()->setARGB('696969');
 
@@ -96,7 +115,10 @@ class Steps
 
     private static function title(Worksheet $sheet)
     {
-        $sheet->mergeCells('A46:T47');
+        $pos = static::$pos;
+        $merge = $pos + 1;
+
+        $sheet->mergeCells("A{$pos}:T{$merge}");
 
         $richText = new RichText();
         $richText->createText('');
@@ -114,10 +136,10 @@ class Steps
             ->setSize(25)
             ->getColor()->setARGB('696969');
 
-        $sheet->getCell('A46')->setValue($richText);
+        $sheet->getCell("A{$pos}")->setValue($richText);
 
         $sheet
-            ->getStyle('K46')
+            ->getStyle("K{$pos}")
             ->applyFromArray([
                 'alignment' => [
                     'horizontal' => 'left',

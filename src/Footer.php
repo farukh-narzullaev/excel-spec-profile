@@ -9,23 +9,29 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class Footer
 {
-    public static function create(Worksheet $sheet)
+    private static $pos;
+
+    public static function create(Worksheet $sheet, $pos)
     {
-        $sheet->mergeCells('A58:F59');
-        $sheet->mergeCells('H58:M59');
-        $sheet->mergeCells('O58:T59');
+        static::$pos = ($pos + 9);
+        $pos = static::$pos;
+        $merge = $pos + 1;
 
-        $sheet->mergeCells('G58:G59');
-        $sheet->mergeCells('N58:N59');
+        $sheet->mergeCells("A{$pos}:F{$merge}");
+        $sheet->mergeCells("H{$pos}:M{$merge}");
+        $sheet->mergeCells("O{$pos}:T{$merge}");
 
-        static::separator($sheet, 'G58');
-        static::separator($sheet, 'N58');
+        $sheet->mergeCells("G{$pos}:G{$merge}");
+        $sheet->mergeCells("N{$pos}:N{$merge}");
 
-        static::contacts($sheet, 'A58');
-        static::email($sheet, 'H58');
-        static::website($sheet, 'O58');
+        static::separator($sheet, "G{$pos}");
+        static::separator($sheet, "N{$pos}");
 
-        $sheet->getStyle('A58:T59')->applyFromArray([
+        static::contacts($sheet, "A{$pos}");
+        static::email($sheet, "H{$pos}");
+        static::website($sheet, "O{$pos}");
+
+        $sheet->getStyle("A{$pos}:T{$merge}")->applyFromArray([
             'font' => [
                 'bold'  => true,
                 'name'  => 'Lucida Sans',

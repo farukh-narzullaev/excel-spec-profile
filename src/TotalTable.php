@@ -10,10 +10,18 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class TotalTable
 {
-    public static function create(Worksheet $sheet)
+    private static $pos;
+
+    public static function create(Worksheet $sheet, $pos)
     {
+        static::$pos = ($pos + 2);
         static::createHeader($sheet);
+
+        static::$pos++;
         static::createContent($sheet);
+        static::$pos += 2;
+
+        return static::$pos;
     }
 
     private static function createContent(Worksheet $sheet)
@@ -24,9 +32,10 @@ class TotalTable
 
     private static function fillContent(Worksheet $sheet)
     {
+        $pos = static::$pos;
         $richText = new RichText();
         $richText->createText('');
-        
+
         $price = $richText->createTextRun('$408.08 AUD');
         $price->getFont()->setBold(true);
         $price->getFont()->setSize(20);
@@ -34,26 +43,30 @@ class TotalTable
             ->getFont()
             ->getColor()->setARGB('696969');
 
-        $based = $richText->createTextRun("\n based on [300+ sqm]");
+        $richText->createText("\r\n");
+        $based = $richText->createTextRun(" based on [300+ sqm]");
         $based->getFont()->setSize(9);
         $based
             ->getFont()
             ->getColor()->setARGB('696969');
 
-        $sheet->getCell('K26')->setValue($richText);
+        $sheet->getCell("K{$pos}")->setValue($richText);
 
-        $sheet->getCell('O26')->setValue('0.961');
-        $sheet->getCell('R26')->setValue('15.9kg');
+        $sheet->getCell("O{$pos}")->setValue('0.961');
+        $sheet->getCell("R{$pos}")->setValue('15.9kg');
     }
 
     private static function styleContent(Worksheet $sheet)
     {
-        $sheet->mergeCells('K26:N28');
-        $sheet->mergeCells('O26:Q28');
-        $sheet->mergeCells('R26:T28');
+        $pos = static::$pos;
+        $merge = ($pos + 2);
+
+        $sheet->mergeCells("K{$pos}:N{$merge}");
+        $sheet->mergeCells("O{$pos}:Q{$merge}");
+        $sheet->mergeCells("R{$pos}:T{$merge}");
 
         $sheet
-            ->getStyle('K26:T28')
+            ->getStyle("K{$pos}:T{$merge}")
             ->applyFromArray([
                 'font' => [
                     'color' => ['argb' => '696969'],
@@ -76,18 +89,19 @@ class TotalTable
 
     private static function createHeader(Worksheet $sheet)
     {
-        $sheet->mergeCells('K25:N25');
-        $sheet->getCell('K25')->setValue('Supply Cost per m²');
+        $pos = static::$pos;
+        $sheet->mergeCells("K{$pos}:N{$pos}");
+        $sheet->getCell("K{$pos}")->setValue('Supply Cost per m²');
 
-        $sheet->mergeCells('O25:Q25');
-        $sheet->getCell('O25')->setValue('Acoustic Rating*');
+        $sheet->mergeCells("O{$pos}:Q{$pos}");
+        $sheet->getCell("O{$pos}")->setValue('Acoustic Rating*');
 
-        $sheet->mergeCells('R25:T25');
-        $sheet->getCell('R25')->setValue('Total Weight');
+        $sheet->mergeCells("R{$pos}:T{$pos}");
+        $sheet->getCell("R{$pos}")->setValue('Total Weight');
 
-        $sheet->getStyle('K25')->applyFromArray(static::headerStyles());
-        $sheet->getStyle('O25')->applyFromArray(static::headerStyles());
-        $sheet->getStyle('R25')->applyFromArray(static::headerStyles());
+        $sheet->getStyle("K{$pos}")->applyFromArray(static::headerStyles());
+        $sheet->getStyle("O{$pos}")->applyFromArray(static::headerStyles());
+        $sheet->getStyle("R{$pos}")->applyFromArray(static::headerStyles());
     }
 
     private static function headerStyles()

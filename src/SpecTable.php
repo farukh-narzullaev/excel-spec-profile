@@ -9,10 +9,151 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class SpecTable
 {
+    protected static $str = "(32mm space), 42x42 Timber - Block, Spotted Gum,
+(32mm space), 42x32 Timber - Dome, Spotted Gum,
+(32mm space), 60x32 Timber - Dome, Spotted Gum,
+32mm space), 32x60 Timber - Block, White
+Oak,(32mm space), 60x32 Timber - Flute, White
+Oak,(32mm space), 42x42 Timber - Block, White
+Oak,(32mm space), 60x32 Timber - Dome, White
+Oak,(32mm space), 60x19 Timber - Block, White
+Oak,(32mm space), 32x32 Timber - Flute, White Oak";
+
+    protected static $sequenceContentLines = 0;
+
+
+    protected static $cells = [
+        'name'        => null,
+        'product'     => null,
+        'app_type'    => null,
+        'sequence'    => null,
+        'profile'     => null,
+        'spacing'     => null,
+        'species'     => null,
+        'coating'     => null,
+        'track_type'  => null,
+        'track_color' => null,
+        'backing'     => null,
+    ];
+
     public static function create(Worksheet $sheet)
     {
+        static::$sequenceContentLines = count(explode(PHP_EOL, static::$str));
+
+        $pos = static::setCells();
+
         static::createHeader($sheet);
         static::createContent($sheet);
+
+        return $pos;
+    }
+
+    private static function setCells()
+    {
+        static::$cells['name'] = [
+            'key' => 'K14', 'value' => 'P14', 'keyMerge' => 'K14:O14', 'valueMerge' => 'P14:T14',
+            'title' => 'project name', 'content' => 'Temporary Project_omIJ4',
+        ];
+
+        static::$cells['product'] = [
+            'key' => 'K15', 'value' => 'P15', 'keyMerge' => 'K15:O15', 'valueMerge' => 'P15:T15',
+            'title' => 'product', 'content' => 'Sculptform Click-on Battens',
+        ];
+
+        $pos = 15;
+        $pos++;
+        static::$cells['app_type'] = [
+            'key' => "K{$pos}",
+            'value' => "P{$pos}",
+            'title' => 'application type',
+            'content' => 'Interior Only',
+            'keyMerge' => "K{$pos}:O{$pos}",
+            'valueMerge' => "P{$pos}:T{$pos}",
+        ];
+
+        $pos++;
+        $offset = ($pos + static::$sequenceContentLines);
+        static::$cells['sequence'] = [
+            'key' => "K{$pos}",
+            'value' => "P{$pos}",
+            'title' => 'sequence',
+            'content' => static::$str,
+            'keyMerge' => "K{$pos}:O{$offset}",
+            'valueMerge' => "P{$pos}:T{$offset}",
+        ];
+        $pos = $offset;
+
+        $pos++;
+        static::$cells['profile'] = [
+            'key' => "K{$pos}",
+            'value' => "P{$pos}",
+            'title' => 'profile',
+            'content' => 'Profile Content',
+            'keyMerge' => "K{$pos}:O{$pos}",
+            'valueMerge' => "P{$pos}:T{$pos}",
+        ];
+
+        $pos++;
+        static::$cells['spacing'] = [
+            'key' => "K{$pos}",
+            'value' => "P{$pos}",
+            'title' => 'spacing',
+            'content' => '32mm',
+            'keyMerge' => "K{$pos}:O{$pos}",
+            'valueMerge' => "P{$pos}:T{$pos}",
+        ];
+
+        $pos++;
+        static::$cells['species'] = [
+            'key' => "K{$pos}",
+            'value' => "P{$pos}",
+            'title' => 'species',
+            'content' => 'Spotted Gum',
+            'keyMerge' => "K{$pos}:O{$pos}",
+            'valueMerge' => "P{$pos}:T{$pos}",
+        ];
+
+        $pos++;
+        static::$cells['coating'] = [
+            'key' => "K{$pos}",
+            'value' => "P{$pos}",
+            'title' => 'coating',
+            'content' => 'Clear Oil',
+            'keyMerge' => "K{$pos}:O{$pos}",
+            'valueMerge' => "P{$pos}:T{$pos}"
+        ];
+
+        $pos++;
+        static::$cells['track_type'] = [
+            'key' => "K{$pos}",
+            'value' => "P{$pos}",
+            'title' => 'mounting track type',
+            'content' => 'Suspended Ceiling Track',
+            'keyMerge' => "K{$pos}:O{$pos}",
+            'valueMerge' => "P{$pos}:T{$pos}",
+        ];
+
+        $pos++;
+        static::$cells['track_color'] = [
+            'key' => "K{$pos}",
+            'value' => "P{$pos}",
+            'title' => 'mounting track color',
+            'content' => 'Matt black',
+            'keyMerge' => "K{$pos}:O{$pos}",
+            'valueMerge' => "P{$pos}:T{$pos}"
+        ];
+
+        $pos++;
+        static::$cells['backing'] = [
+            'key' => "K{$pos}",
+            'value' => "P{$pos}",
+            'title' => 'acoustic backing',
+            'content' => 'Yes',
+            'keyMerge' => "K{$pos}:O{$pos}",
+            'valueMerge' => "P{$pos}:T{$pos}"
+        ];
+
+        return $pos;
     }
 
     private static function createContent(Worksheet $sheet)
@@ -24,51 +165,38 @@ class SpecTable
     private static function fillContent(Worksheet $sheet)
     {
         static::contentNames($sheet);
-        $sheet->getCell('P14')->setValue('Temporary Project_omIJ4');
-        $sheet->getCell('P15')->setValue('Sculptform Click-on Battens');
-        $sheet->getCell('P16')->setValue('Interior Only');
-        $sheet->getCell('P17')->setValue("(32mm space), 42x42 Timber - Block, Spotted Gum,\n(32mm space), 42x32 Timber - Dome, Spotted Gum,\n(32mm space), 60x32 Timber - Dome, Spotted Gum");
-        $sheet->getCell('P18')->setValue('32mm');
-        $sheet->getCell('P19')->setValue('Spotted Gum');
-        $sheet->getCell('P20')->setValue('Clear Oil');
-        $sheet->getCell('P21')->setValue('Suspended Ceiling Track');
-        $sheet->getCell('P22')->setValue('Matt black');
-        $sheet->getCell('P23')->setValue('Yes');
+        foreach (static::$cells as $cell) {
+            $sheet->getCell($cell['value'])->setValue($cell['content']);
+        }
     }
 
     private static function contentNames(Worksheet $sheet)
     {
-        $sheet->getCell('K14')->setValue('PROJECT NAME');
-        $sheet->getCell('K15')->setValue('PRODUCT');
-        $sheet->getCell('K16')->setValue('APPLICATION TYPE');
-        $sheet->getCell('K17')->setValue('SEQUENCE');
-        $sheet->getCell('K18')->setValue('SPACING');
-        $sheet->getCell('K19')->setValue('SPECIES');
-        $sheet->getCell('K20')->setValue('COATING');
-        $sheet->getCell('K21')->setValue('MOUNTING TRACK TYPE');
-        $sheet->getCell('K22')->setValue('MOUNTING TRACK COLOR');
-        $sheet->getCell('K23')->setValue('ACOUSTIC BACKING');
+        foreach (static::$cells as $cell) {
+            $sheet->getCell($cell['key'])->setValue(strtoupper($cell['title']));
+        }
     }
 
     private static function styleContent(Worksheet $sheet)
     {
-        $sheet->mergeCells('K14:O14'); $sheet->mergeCells('P14:T14');
-        $sheet->mergeCells('K15:O15'); $sheet->mergeCells('P15:T15');
-        $sheet->mergeCells('K16:O16'); $sheet->mergeCells('P16:T16');
-        $sheet->mergeCells('K17:O17'); $sheet->mergeCells('P17:T17');
-        $sheet->mergeCells('K18:O18'); $sheet->mergeCells('P18:T18');
-        $sheet->mergeCells('K19:O19'); $sheet->mergeCells('P19:T19');
-        $sheet->mergeCells('K20:O20'); $sheet->mergeCells('P20:T20');
-        $sheet->mergeCells('K21:O21'); $sheet->mergeCells('P21:T21');
-        $sheet->mergeCells('K22:O22'); $sheet->mergeCells('P22:T22');
-        $sheet->mergeCells('K23:O23'); $sheet->mergeCells('P23:T23');
+        foreach (static::$cells as $cell) {
+            $sheet->mergeCells($cell['keyMerge']);
+            $sheet->mergeCells($cell['valueMerge']);
+        }
+
+        $K = explode(":", reset(static::$cells)['keyMerge'])[0];
+        $O = explode(":", end(static::$cells)['keyMerge'])[1];
+        $T = explode(":", end(static::$cells)['valueMerge'])[1];
+
+//        dump("{$K}:{$T}");
+//        dump("{$K}:{$O}");
+//        die;
 
         $sheet
-            ->getStyle('K14:T23')
+            ->getStyle("{$K}:{$T}")
             ->applyFromArray([
-                'font' => [
-                    'color' => ['argb' => '696969']
-                ],
+                'font' => ['color' => ['argb' => '696969']],
+                'alignment' => ['vertical' => 'top', 'wrapText' => true],
                 'borders' => [
                     'allBorders' => [
                         'borderStyle' => Border::BORDER_THIN,
@@ -78,16 +206,17 @@ class SpecTable
             ]);
 
         $sheet
-            ->getStyle('K14:O23')
+            ->getStyle("{$K}:{$O}")
             ->applyFromArray([
+                'alignment' => ['vertical' => 'center'],
                 'fill' => [
                     'fillType'   => Fill::FILL_SOLID,
                     'startColor' => ['argb' => 'f8f9f8']
                 ]
             ]);
 
-        $sheet->getStyle('K14')->getBorders()->getTop()->setBorderStyle(Border::BORDER_NONE);
-        $sheet->getStyle('O14')->getBorders()->getTop()->setBorderStyle(Border::BORDER_NONE);
+        //$sheet->getStyle('K14')->getBorders()->getTop()->setBorderStyle(Border::BORDER_NONE);
+        //$sheet->getStyle('O14')->getBorders()->getTop()->setBorderStyle(Border::BORDER_NONE);
     }
 
     private static function createHeader(Worksheet $sheet)

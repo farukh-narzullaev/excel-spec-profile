@@ -35,7 +35,7 @@ class Header
 
         $header->setWidth(static::$sizes[$version]);
         $header->setHeight(210);
-        $header->setHyperlink($headerLink);
+//        $header->setHyperlink($headerLink);
         $header->setWorksheet($sheet);
     }
 }
