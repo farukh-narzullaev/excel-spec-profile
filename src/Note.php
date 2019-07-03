@@ -112,7 +112,7 @@ class Note
 
         $price = $richText->createTextRun($heading);
         $price->getFont()->setBold(true);
-        //$price->getFont()->setSize(20);
+        $price->getFont()->setSize(12);
         $price
             ->getFont()
             ->getColor()->setARGB('696969');

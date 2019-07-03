@@ -102,13 +102,17 @@ class TotalTable
         $sheet->getStyle("K{$pos}")->applyFromArray(static::headerStyles());
         $sheet->getStyle("O{$pos}")->applyFromArray(static::headerStyles());
         $sheet->getStyle("R{$pos}")->applyFromArray(static::headerStyles());
+
+        static::separator($sheet, "O{$pos}");
+        static::separator($sheet, "R{$pos}");
     }
 
     private static function headerStyles()
     {
         return [
             'font' => [
-                'bold'  => true,
+                'bold'  => false,
+                'size'  => 14,
                 'name'  => 'Lucida Sans',
                 'color' => ['argb' => Color::COLOR_WHITE]
             ],
@@ -119,4 +123,17 @@ class TotalTable
             ],
         ];
     }
+
+    private static function separator(Worksheet $sheet, $cell)
+    {
+        $sheet->getStyle($cell)->applyFromArray([
+            'borders' => [
+                'left' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                    'color'       => ['argb' => 'FFFFFF']
+                ]
+            ]
+        ]);
+    }
+
 }

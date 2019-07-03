@@ -188,14 +188,13 @@ Oak,(32mm space), 32x32 Timber - Flute, White Oak";
         $O = explode(":", end(static::$cells)['keyMerge'])[1];
         $T = explode(":", end(static::$cells)['valueMerge'])[1];
 
-//        dump("{$K}:{$T}");
-//        dump("{$K}:{$O}");
-//        die;
-
         $sheet
             ->getStyle("{$K}:{$T}")
             ->applyFromArray([
-                'font' => ['color' => ['argb' => '696969']],
+                'font' => [
+                    'size' => 14,
+                    'color' => ['argb' => '696969']
+                ],
                 'alignment' => ['vertical' => 'top', 'wrapText' => true],
                 'borders' => [
                     'allBorders' => [
@@ -230,9 +229,9 @@ Oak,(32mm space), 32x32 Timber - Flute, White Oak";
     {
         return [
             'font' => [
-                'bold'  => true,
+                'bold'  => false,
                 'name'  => 'Lucida Sans',
-                // 'size'  => 15,
+                'size'  => 16,
                 'color' => ['argb' => Color::COLOR_WHITE]
             ],
             'alignment' => ['horizontal' => 'center'],
