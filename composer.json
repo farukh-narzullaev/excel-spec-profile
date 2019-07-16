@@ -10,7 +10,7 @@
         "phpoffice/phpspreadsheet": "^1.6"
     },
     "require-dev": {
-        "symfony/var-dumper": "*"
+        "symfony/var-dumper": "^4.3"
     },
     "autoload": {
         "psr-4": {

@@ -51,106 +51,114 @@ Oak,(32mm space), 32x32 Timber - Flute, White Oak";
     private static function setCells()
     {
         static::$cells['name'] = [
-            'key' => 'K14', 'value' => 'P14', 'keyMerge' => 'K14:O14', 'valueMerge' => 'P14:T14',
-            'title' => 'project name', 'content' => 'Temporary Project_omIJ4',
+            'key' => 'K14', 
+            'value' => 'O14', 
+            'keyMerge' => 'K14:N14', 
+            'valueMerge' => 'O14:T14',
+            'title' => 'project name', 
+            'content' => 'Temporary Project_omIJ4',
         ];
 
         static::$cells['product'] = [
-            'key' => 'K15', 'value' => 'P15', 'keyMerge' => 'K15:O15', 'valueMerge' => 'P15:T15',
-            'title' => 'product', 'content' => 'Sculptform Click-on Battens',
+            'key' => 'K15',
+            'value' => 'O15', 
+            'keyMerge' => 'K15:N15', 
+            'valueMerge' => 'O15:T15',
+            'title' => 'product', 
+            'content' => 'Sculptform Click-on Battens',
         ];
 
         $pos = 15;
         $pos++;
         static::$cells['app_type'] = [
             'key' => "K{$pos}",
-            'value' => "P{$pos}",
+            'value' => "O{$pos}",
             'title' => 'application type',
             'content' => 'Interior Only',
-            'keyMerge' => "K{$pos}:O{$pos}",
-            'valueMerge' => "P{$pos}:T{$pos}",
+            'keyMerge' => "K{$pos}:N{$pos}",
+            'valueMerge' => "O{$pos}:T{$pos}",
         ];
 
         $pos++;
         $offset = ($pos + static::$sequenceContentLines);
         static::$cells['sequence'] = [
             'key' => "K{$pos}",
-            'value' => "P{$pos}",
+            'value' => "O{$pos}",
             'title' => 'sequence',
             'content' => static::$str,
-            'keyMerge' => "K{$pos}:O{$offset}",
-            'valueMerge' => "P{$pos}:T{$offset}",
+            'keyMerge' => "K{$pos}:N{$offset}",
+            'valueMerge' => "O{$pos}:T{$offset}",
         ];
         $pos = $offset;
 
         $pos++;
         static::$cells['profile'] = [
             'key' => "K{$pos}",
-            'value' => "P{$pos}",
+            'value' => "O{$pos}",
             'title' => 'profile',
             'content' => 'Profile Content',
-            'keyMerge' => "K{$pos}:O{$pos}",
-            'valueMerge' => "P{$pos}:T{$pos}",
+            'keyMerge' => "K{$pos}:N{$pos}",
+            'valueMerge' => "O{$pos}:T{$pos}",
         ];
 
         $pos++;
         static::$cells['spacing'] = [
             'key' => "K{$pos}",
-            'value' => "P{$pos}",
+            'value' => "O{$pos}",
             'title' => 'spacing',
             'content' => '32mm',
-            'keyMerge' => "K{$pos}:O{$pos}",
-            'valueMerge' => "P{$pos}:T{$pos}",
+            'keyMerge' => "K{$pos}:N{$pos}",
+            'valueMerge' => "O{$pos}:T{$pos}",
         ];
 
         $pos++;
         static::$cells['species'] = [
             'key' => "K{$pos}",
-            'value' => "P{$pos}",
+            'value' => "O{$pos}",
             'title' => 'species',
             'content' => 'Spotted Gum',
-            'keyMerge' => "K{$pos}:O{$pos}",
-            'valueMerge' => "P{$pos}:T{$pos}",
+            'keyMerge' => "K{$pos}:N{$pos}",
+            'valueMerge' => "O{$pos}:T{$pos}",
         ];
 
         $pos++;
         static::$cells['coating'] = [
             'key' => "K{$pos}",
-            'value' => "P{$pos}",
+            'value' => "O{$pos}",
             'title' => 'coating',
             'content' => 'Clear Oil',
-            'keyMerge' => "K{$pos}:O{$pos}",
-            'valueMerge' => "P{$pos}:T{$pos}"
+            'keyMerge' => "K{$pos}:N{$pos}",
+            'valueMerge' => "O{$pos}:T{$pos}"
         ];
 
         $pos++;
         static::$cells['track_type'] = [
             'key' => "K{$pos}",
-            'value' => "P{$pos}",
+            'value' => "O{$pos}",
             'title' => 'mounting track type',
             'content' => 'Suspended Ceiling Track',
-            'keyMerge' => "K{$pos}:O{$pos}",
-            'valueMerge' => "P{$pos}:T{$pos}",
+            'keyMerge' => "K{$pos}:N{$pos}",
+            'valueMerge' => "O{$pos}:T{$pos}",
         ];
 
         $pos++;
         static::$cells['track_color'] = [
             'key' => "K{$pos}",
-            'value' => "P{$pos}",
+            'value' => "O{$pos}",
             'title' => 'mounting track color',
             'content' => 'Matt black',
-            'keyMerge' => "K{$pos}:O{$pos}",
-            'valueMerge' => "P{$pos}:T{$pos}"
+            'keyMerge' => "K{$pos}:N{$pos}",
+            'valueMerge' => "O{$pos}:T{$pos}"
         ];
 
         $pos++;
         static::$cells['backing'] = [
             'key' => "K{$pos}",
-            'value' => "P{$pos}",
+            'value' => "O{$pos}",
             'title' => 'acoustic backing',
             'content' => 'Yes',
-            'keyMerge' => "K{$pos}:O{$pos}",
-            'valueMerge' => "P{$pos}:T{$pos}"
+            'keyMerge' => "K{$pos}:N{$pos}",
+            'valueMerge' => "O{$pos}:T{$pos}"
         ];
 
         return $pos;
@@ -212,6 +220,14 @@ Oak,(32mm space), 32x32 Timber - Flute, White Oak";
                     'fillType'   => Fill::FILL_SOLID,
                     'startColor' => ['argb' => 'f8f9f8']
                 ]
+            ]);
+
+        $sheet
+            ->getStyle(static::$cells['sequence']['valueMerge'])
+            ->applyFromArray([
+                'font' => [
+                    'size' => 13,
+                ],
             ]);
 
         //$sheet->getStyle('K14')->getBorders()->getTop()->setBorderStyle(Border::BORDER_NONE);
