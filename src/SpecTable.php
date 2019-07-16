@@ -80,7 +80,7 @@ Oak,(32mm space), 32x32 Timber - Flute, White Oak";
         ];
 
         $pos++;
-        $offset = ($pos + static::$sequenceContentLines * 2 + 3);
+        $offset = ($pos + static::$sequenceContentLines);
         static::$cells['sequence'] = [
             'key' => "K{$pos}",
             'value' => "O{$pos}",
